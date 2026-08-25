@@ -1,0 +1,39 @@
+零禾一智能 SoftAuto 0.5.3
+================
+
+1. 从开始菜单或桌面快捷方式打开“零禾一智能 SoftAuto”。
+2. 新建项目、文件夹并拾取元素。项目数据保存在：
+   %LOCALAPPDATA%\SoftAuto\data
+3. MCP 服务程序安装在：
+   <安装目录>\mcp\SoftAutoMCP.exe
+4. 点击软件顶部“MCP 配置”，把剪贴板内容粘贴到 Agent 的 MCP 配置中。
+5. 跨电脑迁移时，在原电脑点击“导出项目”，在新电脑点击“导入项目”。
+
+安装网页扩展：
+
+1. 打开零禾一智能 SoftAuto，点击顶部“安装网页扩展”。
+2. 软件会打开 chrome://extensions 和扩展目录，并复制目录路径。
+3. 打开“开发者模式”，点击“加载已解压的扩展程序”，选择 web-extension 文件夹。
+
+如果已经安装过扩展，请在扩展卡片上点击圆形“重新加载”按钮并刷新目标网页。
+随后点击零禾一智能 SoftAuto 的“拾取网页元素”，到网页上按 Ctrl + 左键保存 DOM 元素。
+
+普通个人版 Chrome 不允许桌面软件静默安装本地扩展，因此本地版仍需要用户在 Chrome 中确认一次。发布 Chrome Web Store 后，按钮可直接跳转商店安装页。
+
+MCP 配置示例（也可由软件一键复制）：
+
+{
+  "mcpServers": {
+    "software-automation": {
+      "command": "C:\\Users\\<用户名>\\AppData\\Local\\Programs\\SoftAuto\\mcp\\SoftAutoMCP.exe"
+    }
+  }
+}
+
+SoftAutoMCP.exe 默认跟随拾取器当前选中的项目，并启用经过确认保护的元素操作工具。
+
+如果使用“导出给 MCP”生成的独立元素库，可给 MCP 进程增加环境变量：
+
+SOFTAUTO_ELEMENT_LIBRARY=C:\path\to\project-elements.json
+
+注意：桌面元素使用 Windows UIA，网页元素使用 Chrome DOM。迁移后应先逐个验证关键元素。

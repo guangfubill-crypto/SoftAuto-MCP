@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>零禾一智能 Web Connector</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { width: 320px; margin: 0; font: 14px/1.65 "Microsoft YaHei UI", sans-serif; color: #17312b; background: #f3f6f4; }
+      header { display: flex; align-items: center; gap: 11px; padding: 16px 18px; color: #fff; background: #0f5b50; }
+      header img { width: 38px; height: 38px; padding: 4px; border-radius: 10px; background: #fff; }
+      h1 { margin: 0; font-size: 16px; }
+      header small { display: block; color: #cfe7df; font-size: 11px; }
+      main { padding: 16px 18px 18px; }
+      .status { display: inline-block; padding: 5px 11px; border-radius: 999px; background: #fff4d6; color: #9a6700; font-weight: 600; }
+      .status.ok { background: #e7f5ee; color: #0f5b50; }
+      p { margin: 12px 0 0; color: #64756f; }
+    </style>
+  </head>
+  <body>
+    <header><img src="icons/icon-48.png" alt=""><div><h1>零禾一智能</h1><small>Web Connector</small></div></header>
+    <main><span id="status" class="status">正在检查连接…</span>
+    <p>在 SoftAuto 点击“拾取网页元素”，然后在网页中按 Ctrl + 左键选取。验证与自动化操作会直接使用 DOM。</p></main>
+    <script src="popup.js"></script>
+  </body>
+</html>

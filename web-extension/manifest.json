@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "零禾一智能 Web Connector",
+  "version": "0.3.1",
+  "description": "为零禾一智能 SoftAuto 拾取、验证并自动操作稳定的网页 DOM 元素。",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "零禾一智能 Web Connector",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "permissions": ["activeTab", "storage", "tabs", "webNavigation"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "background": {"service_worker": "service-worker.js"},
+  "content_scripts": [{
+    "matches": ["http://*/*", "https://*/*"],
+    "js": ["content-script.js"],
+    "all_frames": true,
+    "run_at": "document_idle"
+  }]
+}

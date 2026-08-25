@@ -1,0 +1,34 @@
+{
+  "mcpServers": {
+    "windows-ui": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "C:/absolute/path/to/SoftAuto-MCP",
+        "mcp",
+        "run",
+        "src/softauto/server.py:mcp"
+      ],
+      "env": {
+        "SOFTAUTO_ALLOW_ACTIONS": "0"
+      }
+    },
+    "browser-playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@0.0.79",
+        "--isolated",
+        "--snapshot-boxes"
+      ]
+    },
+    "vision-uivision": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "uivision-mcp-bridge@1.1.1"
+      ]
+    }
+  }
+}

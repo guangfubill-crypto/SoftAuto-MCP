@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "openadapt-workflows": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "openadapt-agent==2.0.2",
+        "openadapt-agent",
+        "serve",
+        "--bundles",
+        "C:/absolute/path/to/openadapt-bundles"
+      ]
+    }
+  }
+}
+

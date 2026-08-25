@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>SoftAuto DOM Test</title>
+    <style>
+      body { font: 16px sans-serif; margin: 40px; }
+      label, input, button { display: block; margin: 10px 0; }
+    </style>
+  </head>
+  <body>
+    <label for="account">账号</label>
+    <input id="account" name="account" data-testid="account-input">
+    <label for="password">密码</label>
+    <input id="password" name="password" type="password" data-testid="password-input">
+    <button id="login" data-testid="login-button">登录</button>
+    <div id="logged-in" hidden>LOGIN_OK</div>
+
+    <label for="order-code">订单代码</label>
+    <input id="order-code" data-testid="order-code">
+    <button id="new-order" data-testid="new-order-button">新建订单</button>
+    <output id="order-reference"></output>
+    <button id="continue" data-testid="continue-button">继续</button>
+
+    <script>
+      document.getElementById("login").addEventListener("click", () => {
+        const account = document.getElementById("account").value;
+        const password = document.getElementById("password").value;
+        const result = document.getElementById("logged-in");
+        result.hidden = false;
+        result.textContent = account === "admin" && password === "admin" ? "LOGIN_OK" : "LOGIN_FAIL";
+      });
+      document.getElementById("new-order").addEventListener("click", () => {
+        const code = document.getElementById("order-code").value;
+        document.getElementById("order-reference").textContent = `REF-${code}`;
+      });
+      document.getElementById("continue").addEventListener("click", () => {
+        document.getElementById("order-code").value = "";
+        document.getElementById("order-reference").textContent = "";
+      });
+    </script>
+  </body>
+</html>
