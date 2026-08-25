@@ -2,11 +2,11 @@
   <img src="assets/brand-mark.svg" width="120" alt="SoftAuto logo">
 </p>
 
-<h1 align="center">零禾一智能 SoftAuto</h1>
+<h1 align="center">零禾一智能 SoftAuto — Windows RPA + MCP 软件自动化</h1>
 
 <p align="center">
-  <strong>Computer Use 负责看懂，SoftAuto 负责高速、稳定地执行。</strong><br>
-  Turn Windows applications and web elements into MCP tools with an RPA-style execution path.
+  <strong>开源 Windows RPA、桌面 UI Automation、网页自动化与 MCP Server</strong><br>
+  面向 AI Agent 的元素级软件自动化：Computer Use 负责看懂，SoftAuto 负责高速、稳定地执行。
 </p>
 
 <p align="center">
@@ -25,6 +25,12 @@
 <p align="center">
   <img src="https://github.com/guangfubill-crypto/SoftAuto-MCP/releases/download/v0.5.3/SoftAuto-0.5.3-installed-responsive-zh.png" alt="SoftAuto 中文界面" width="920">
 </p>
+
+## SoftAuto 是什么
+
+SoftAuto 是一个面向 AI Agent 的开源 Windows RPA 和 MCP Server。它通过 Microsoft UI Automation（UIA）定位桌面软件元素，通过 Chrome DOM 定位网页元素，再把点击、输入、读取、高亮和验证等操作暴露为 Model Context Protocol（MCP）工具。适用于 ERP 自动化、桌面软件自动化、网页业务系统自动化、GUI 测试和重复办公流程。
+
+它不是另一个依赖截图与坐标的宏工具，而是 Computer Use 的确定性执行层：元素只需拾取和验证一次，Agent 后续即可按名称调用，减少重复截图、视觉推理和坐标点击。
 
 ## 解决的核心痛点
 

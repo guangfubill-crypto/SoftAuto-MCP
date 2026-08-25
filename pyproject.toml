@@ -1,11 +1,25 @@
 [project]
 name = "software-automation-mcp"
 version = "0.5.3"
-description = "Windows UIA and Chrome DOM automation with a policy-gated MCP server"
+description = "Open-source Windows RPA and MCP server for desktop UIA, browser DOM, ERP, and AI agent automation"
 readme = "README.md"
 license = "MIT"
 authors = [{ name = "Lingheyi Intelligence" }]
-keywords = ["mcp", "rpa", "agent", "windows", "uiautomation", "browser-automation"]
+keywords = [
+  "mcp",
+  "mcp-server",
+  "model-context-protocol",
+  "rpa",
+  "robotic-process-automation",
+  "ai-agent",
+  "computer-use",
+  "windows-automation",
+  "desktop-automation",
+  "ui-automation",
+  "uiautomation",
+  "browser-automation",
+  "erp-automation",
+]
 requires-python = ">=3.11,<3.14"
 dependencies = [
   "mcp[cli]>=2.0,<3",

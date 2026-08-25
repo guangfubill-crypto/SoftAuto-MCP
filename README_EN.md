@@ -2,11 +2,11 @@
   <img src="assets/brand-mark.svg" width="120" alt="SoftAuto logo">
 </p>
 
-<h1 align="center">Lingheyi SoftAuto</h1>
+<h1 align="center">Lingheyi SoftAuto — Open-source Windows RPA & MCP Server</h1>
 
 <p align="center">
-  <strong>Let Computer Use understand the interface. Let SoftAuto execute it fast and reliably.</strong><br>
-  Turn Windows applications and web elements into MCP tools with an RPA-style execution path.
+  <strong>Desktop UI Automation, Browser Automation, and ERP Automation for AI Agents</strong><br>
+  Let Computer Use understand the interface. Let SoftAuto execute it fast and reliably.
 </p>
 
 <p align="center">
@@ -24,6 +24,12 @@
 <p align="center">
   <img src="https://github.com/guangfubill-crypto/SoftAuto-MCP/releases/download/v0.5.3/SoftAuto-0.5.3-responsive-narrow-en.png" alt="SoftAuto English interface" width="760">
 </p>
+
+## What is SoftAuto?
+
+SoftAuto is an open-source Windows RPA application and MCP server for AI agents. It locates desktop controls through Microsoft UI Automation (UIA), locates web elements through the Chrome DOM, and exposes click, type, read, highlight, and validation actions as Model Context Protocol (MCP) tools. It is designed for ERP automation, desktop automation, browser automation, GUI testing, and repeatable business workflows.
+
+SoftAuto acts as a deterministic execution layer for Computer Use. Capture and validate an element once, then let an Agent invoke it by name without repeating screenshot analysis and coordinate clicking for every step.
 
 ## The problem
 
