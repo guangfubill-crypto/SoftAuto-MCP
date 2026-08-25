@@ -25,9 +25,9 @@ packaging = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/fu12133/SoftAuto-MCP"
-Repository = "https://github.com/fu12133/SoftAuto-MCP"
-Issues = "https://github.com/fu12133/SoftAuto-MCP/issues"
+Homepage = "https://github.com/guangfubill-crypto/SoftAuto-MCP"
+Repository = "https://github.com/guangfubill-crypto/SoftAuto-MCP"
+Issues = "https://github.com/guangfubill-crypto/SoftAuto-MCP/issues"
 
 [project.scripts]
 softauto-inspector = "softauto.picker:main"

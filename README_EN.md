@@ -10,19 +10,19 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/fu12133/SoftAuto-MCP/actions/workflows/ci.yml"><img src="https://github.com/fu12133/SoftAuto-MCP/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="https://github.com/fu12133/SoftAuto-MCP/releases/latest"><img src="https://img.shields.io/github/v/release/fu12133/SoftAuto-MCP" alt="Release"></a>
+  <a href="https://github.com/guangfubill-crypto/SoftAuto-MCP/actions/workflows/ci.yml"><img src="https://github.com/guangfubill-crypto/SoftAuto-MCP/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/guangfubill-crypto/SoftAuto-MCP/releases/latest"><img src="https://img.shields.io/github/v/release/guangfubill-crypto/SoftAuto-MCP" alt="Release"></a>
   <img src="https://img.shields.io/badge/platform-Windows%2010%2F11-0078D4" alt="Windows 10/11">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2FA36B" alt="MIT License"></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/fu12133/SoftAuto-MCP/releases/latest"><strong>Download for Windows</strong></a>
+  <a href="https://github.com/guangfubill-crypto/SoftAuto-MCP/releases/latest"><strong>Download for Windows</strong></a>
   · <a href="README.md">简体中文</a>
 </p>
 
 <p align="center">
-  <img src="https://github.com/fu12133/SoftAuto-MCP/releases/download/v0.5.3/SoftAuto-0.5.3-responsive-narrow-en.png" alt="SoftAuto English interface" width="760">
+  <img src="https://github.com/guangfubill-crypto/SoftAuto-MCP/releases/download/v0.5.3/SoftAuto-0.5.3-responsive-narrow-en.png" alt="SoftAuto English interface" width="760">
 </p>
 
 ## The problem
@@ -69,7 +69,7 @@ flowchart LR
 
 ### Windows installer
 
-1. Download `Lingheyi-SoftAuto-Setup-*.exe` from [Releases](https://github.com/fu12133/SoftAuto-MCP/releases/latest).
+1. Download `Lingheyi-SoftAuto-Setup-*.exe` from [Releases](https://github.com/guangfubill-crypto/SoftAuto-MCP/releases/latest).
 2. Install SoftAuto and create a project and folder.
 3. Click **Pick Desktop Element** or **Pick Web Element**, then press `Ctrl + left-click` on the target.
 4. Adjust locator properties and click **Validate**.

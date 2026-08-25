@@ -10,20 +10,20 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/fu12133/SoftAuto-MCP/actions/workflows/ci.yml"><img src="https://github.com/fu12133/SoftAuto-MCP/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="https://github.com/fu12133/SoftAuto-MCP/releases/latest"><img src="https://img.shields.io/github/v/release/fu12133/SoftAuto-MCP" alt="Release"></a>
+  <a href="https://github.com/guangfubill-crypto/SoftAuto-MCP/actions/workflows/ci.yml"><img src="https://github.com/guangfubill-crypto/SoftAuto-MCP/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/guangfubill-crypto/SoftAuto-MCP/releases/latest"><img src="https://img.shields.io/github/v/release/guangfubill-crypto/SoftAuto-MCP" alt="Release"></a>
   <img src="https://img.shields.io/badge/platform-Windows%2010%2F11-0078D4" alt="Windows 10/11">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2FA36B" alt="MIT License"></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/fu12133/SoftAuto-MCP/releases/latest"><strong>下载 Windows 安装包</strong></a>
+  <a href="https://github.com/guangfubill-crypto/SoftAuto-MCP/releases/latest"><strong>下载 Windows 安装包</strong></a>
   · <a href="README_EN.md">English</a>
   · <a href="#五分钟上手">快速开始</a>
 </p>
 
 <p align="center">
-  <img src="https://github.com/fu12133/SoftAuto-MCP/releases/download/v0.5.3/SoftAuto-0.5.3-installed-responsive-zh.png" alt="SoftAuto 中文界面" width="920">
+  <img src="https://github.com/guangfubill-crypto/SoftAuto-MCP/releases/download/v0.5.3/SoftAuto-0.5.3-installed-responsive-zh.png" alt="SoftAuto 中文界面" width="920">
 </p>
 
 ## 解决的核心痛点
@@ -66,7 +66,7 @@ flowchart LR
 
 ### 安装版（推荐）
 
-1. 从 [Releases](https://github.com/fu12133/SoftAuto-MCP/releases/latest) 下载 `Lingheyi-SoftAuto-Setup-*.exe`。
+1. 从 [Releases](https://github.com/guangfubill-crypto/SoftAuto-MCP/releases/latest) 下载 `Lingheyi-SoftAuto-Setup-*.exe`。
 2. 安装并打开 SoftAuto，新建项目和文件夹。
 3. 点击“拾取桌面元素”或“拾取网页元素”，移动到目标控件后按 `Ctrl + 左键`保存。
 4. 在右侧调整定位属性并点击“验证”。
