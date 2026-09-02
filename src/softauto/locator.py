@@ -40,6 +40,12 @@ SELECTOR_FIELDS = (
     "process_id",
     "native_window_handle",
 )
+# These values identify one running UI instance, not the logical control. They
+# are retained in snapshots for diagnostics but are never valid locator keys.
+VOLATILE_SELECTOR_FIELDS = frozenset({"process_id", "native_window_handle"})
+STABLE_SELECTOR_FIELDS = tuple(
+    field for field in SELECTOR_FIELDS if field not in VOLATILE_SELECTOR_FIELDS
+)
 
 
 def safe_property(control: Any, name: str, default: Any = "") -> Any:
@@ -112,7 +118,7 @@ def configured_descriptor(
     configured_values = values or {}
     selected = {}
     for field in active_fields:
-        if field not in SELECTOR_FIELDS:
+        if field not in STABLE_SELECTOR_FIELDS:
             continue
         value = configured_values.get(field, properties.get(field))
         value = resolve_variables(value, variables)
@@ -156,10 +162,20 @@ def selector_variable_names(locator: dict[str, Any]) -> list[str]:
 def ensure_selector(locator: dict[str, Any]) -> dict[str, Any]:
     selector = locator.setdefault("selector", {})
     selector.setdefault("window", recommended_selector_fields(locator.get("window", {})))
+    selector["window"] = [
+        field for field in selector["window"] if field in STABLE_SELECTOR_FIELDS
+    ]
     selector.setdefault(
         "path", [recommended_selector_fields(item) for item in locator.get("path", [])]
     )
+    selector["path"] = [
+        [field for field in fields if field in STABLE_SELECTOR_FIELDS]
+        for fields in selector["path"]
+    ]
     selector.setdefault("target", recommended_selector_fields(locator.get("target", {})))
+    selector["target"] = [
+        field for field in selector["target"] if field in STABLE_SELECTOR_FIELDS
+    ]
     values = selector.setdefault("values", {})
     values.setdefault("window", {})
     values.setdefault("path", [{} for _item in locator.get("path", [])])

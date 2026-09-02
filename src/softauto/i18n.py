@@ -47,8 +47,8 @@ TEXTS: dict[str, dict[str, str]] = {
         "en": "Ready · Select a project to capture elements",
     },
     "selector_help": {
-        "zh-CN": "勾选参与定位的属性；★表示系统推荐。动态文本优先使用 NamePrefix。",
-        "en": "Select locator attributes. ★ indicates recommended. Use NamePrefix for dynamic text.",
+        "zh-CN": "勾选参与定位的属性；★表示系统推荐。动态文本优先使用 NamePrefix。ProcessId 和窗口句柄仅用于诊断，不参与定位。",
+        "en": "Select locator attributes. ★ indicates recommended. Use NamePrefix for dynamic text. ProcessId and window handles are diagnostic-only.",
     },
     "recommended": {"zh-CN": "系统推荐", "en": "Recommended"},
     "save_properties": {"zh-CN": "保存属性", "en": "Save Properties"},

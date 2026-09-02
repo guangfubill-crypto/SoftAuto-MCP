@@ -1,3 +1,15 @@
+# SoftAuto 0.5.4 — 重启后仍可复用的稳定定位
+
+SoftAuto 0.5.4 修复桌面元素重启后失效的常见原因：`ProcessId` 和 `NativeWindowHandle` 属于运行时身份，不再允许作为定位条件；历史元素库中的这两个字段也会在解析时自动忽略。
+
+元素快照仍保留进程 ID 与窗口句柄，便于诊断，但稳定定位只使用 AutomationId、Name/NamePrefix、ClassName、ControlType、FrameworkId 和结构路径。
+
+本版本新增运行时身份字段回归测试；Windows UIA、网页 DOM、MCP 和项目元素库功能保持兼容。
+
+Windows 用户请下载 `Lingheyi-SoftAuto-Setup-0.5.4.exe`。
+
+---
+
 # SoftAuto 0.5.3 — Agent 决策，RPA 速度执行
 
 Computer Use 擅长理解未知界面，但每一步都依赖截图、视觉推理和坐标操作时，自动化会慢且容易漂移。

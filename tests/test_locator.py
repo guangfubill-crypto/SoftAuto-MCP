@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from softauto.locator import (
+    STABLE_SELECTOR_FIELDS,
     build_locator,
     choose_best,
     configured_descriptor,
@@ -151,6 +152,42 @@ def test_system_recommendation_uses_prefix_instead_of_dynamic_full_name() -> Non
     assert "automation_id" in selected
     assert "name_prefix" in selected
     assert "name" not in selected
+
+
+def test_runtime_identity_fields_are_not_selectable() -> None:
+    locator = {
+        "window": {
+            "automation_id": "frmLogin",
+            "process_id": 123,
+            "native_window_handle": 456,
+        },
+        "path": [],
+        "target": {
+            "automation_id": "txtUsername",
+            "process_id": 123,
+            "native_window_handle": 789,
+        },
+        "selector": {
+            "window": ["automation_id", "process_id", "native_window_handle"],
+            "path": [],
+            "target": ["automation_id", "process_id", "native_window_handle"],
+        },
+    }
+
+    ensure_selector(locator)
+    assert "process_id" not in STABLE_SELECTOR_FIELDS
+    assert "native_window_handle" not in STABLE_SELECTOR_FIELDS
+    assert locator["selector"]["window"] == ["automation_id"]
+    assert locator["selector"]["target"] == ["automation_id"]
+
+
+def test_runtime_identity_fields_are_ignored_when_configuring_descriptor() -> None:
+    configured = configured_descriptor(
+        {"automation_id": "txtUsername", "process_id": 123},
+        ["automation_id", "process_id"],
+    )
+
+    assert configured == {"automation_id": "txtUsername"}
 
 
 def test_wildcard_property_matches_current_dynamic_value() -> None:

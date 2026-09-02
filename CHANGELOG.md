@@ -2,6 +2,12 @@
 
 All notable changes to SoftAuto are documented here.
 
+## [0.5.4] - 2026-09-02
+
+- 禁止将 `ProcessId` 和 `NativeWindowHandle` 用作定位条件；这两个字段保留为诊断信息。
+- 过滤旧元素库中遗留的运行时身份选择器，避免重启后因进程或窗口句柄变化而失效。
+- 新增运行时身份字段回归测试。
+
 ## [0.5.3] - 2026-08-25
 
 ### Added

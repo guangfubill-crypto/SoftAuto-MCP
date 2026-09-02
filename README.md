@@ -60,7 +60,7 @@ flowchart LR
 ## 主要能力
 
 - `Ctrl + 左键`拾取并高亮桌面或网页元素，按项目和文件夹管理元素库。
-- 系统推荐稳定属性，也可以编辑属性值、通配符和 `${variable}` 动态变量。
+- 系统推荐稳定属性，也可以编辑属性值、通配符和 `${variable}` 动态变量；`ProcessId` 与 `NativeWindowHandle` 仅用于诊断，不可作为定位条件。
 - 重新打开或移动窗口后，依然可以按窗口锚点、控件路径和目标特征重新定位。
 - MCP 提供 19 个查询与动作工具，包括查找、高亮、点击、输入、聚焦和读取。
 - Windows UIA 与浏览器 DOM 双通道；网页扩展可以从软件内一键打开安装流程。
@@ -140,7 +140,7 @@ uv sync --extra packaging
 .\packaging\build_installer.ps1
 ```
 
-构建结果为 `Lingheyi-SoftAuto-Setup-0.5.3.exe`。安装版包含：
+构建结果为 `Lingheyi-SoftAuto-Setup-0.5.4.exe`。安装版包含：
 
 - `SoftAuto.exe`：元素拾取器与项目元素库界面。
 - `mcp/SoftAutoMCP.exe`：可供 Agent 直接连接的 stdio MCP 服务。

@@ -1,5 +1,5 @@
 #define MyAppName "零禾一智能 SoftAuto"
-#define MyAppVersion "0.5.3"
+#define MyAppVersion "0.5.4"
 #define MyAppPublisher "零禾一智能"
 #define MyAppExeName "SoftAuto.exe"
 

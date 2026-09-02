@@ -64,7 +64,7 @@ flowchart LR
 
 - Capture and highlight desktop or web elements with `Ctrl + left-click`.
 - Organize elements in project-scoped folder trees and move projects between computers.
-- Edit recommended locator properties, wildcards, prefixes, and `${variable}` values.
+- Edit recommended locator properties, wildcards, prefixes, and `${variable}` values. Runtime `ProcessId` and `NativeWindowHandle` remain diagnostic-only and cannot be selected for matching.
 - Resolve elements again after applications restart or windows move.
 - Expose 19 MCP query and action tools, including find, highlight, click, input, focus, and read.
 - Use Windows UIA and browser DOM backends from one element library.

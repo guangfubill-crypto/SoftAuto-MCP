@@ -70,7 +70,7 @@ if (-not $Iscc) {
 
 & $Iscc (Join-Path $PSScriptRoot "SoftAuto.iss")
 
-$BuiltInstaller = Join-Path $PSScriptRoot "installer-dist\Lingheyi-SoftAuto-Setup-0.5.3.exe"
-$Deliverable = Join-Path (Split-Path $ProjectRoot -Parent) "Lingheyi-SoftAuto-Setup-0.5.3.exe"
+$BuiltInstaller = Join-Path $PSScriptRoot "installer-dist\Lingheyi-SoftAuto-Setup-0.5.4.exe"
+$Deliverable = Join-Path (Split-Path $ProjectRoot -Parent) "Lingheyi-SoftAuto-Setup-0.5.4.exe"
 Copy-Item -LiteralPath $BuiltInstaller -Destination $Deliverable -Force
 Get-Item -LiteralPath $Deliverable

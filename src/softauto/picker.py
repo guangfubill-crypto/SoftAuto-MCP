@@ -29,7 +29,7 @@ from softauto.i18n import (
 )
 from softauto.live_highlight import OverlayHighlighter
 from softauto.locator import (
-    SELECTOR_FIELDS,
+    STABLE_SELECTOR_FIELDS,
     ensure_selector,
     recommended_selector_fields,
     selector_properties,
@@ -1127,7 +1127,7 @@ class ElementPickerApp:
             value_variables = {}
             configured_values = selector.get("values", {}).get(section, {})
             row = 0
-            for field in SELECTOR_FIELDS:
+            for field in STABLE_SELECTOR_FIELDS:
                 value = properties.get(field)
                 if value in (None, "", 0):
                     continue
@@ -1208,7 +1208,7 @@ class ElementPickerApp:
         for section, variables in self.detail_vars.items():
             selected = [
                 field
-                for field in SELECTOR_FIELDS
+                for field in STABLE_SELECTOR_FIELDS
                 if variables.get(field, None) and variables[field].get()
             ]
             if not selected:
