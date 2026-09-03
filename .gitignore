@@ -8,6 +8,7 @@ data/
 @AutomationLog.txt
 .ui-responsive-test/
 .installed-mcp-smoke/
+.installed-mcp-smoke-*/
 packaging/build/
 packaging/dist/
 packaging/spec/
