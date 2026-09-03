@@ -12,6 +12,7 @@ from softauto.locator import (
     ensure_selector,
     path_below_window,
     resolve_path,
+    selector_profile,
     selector_variable_names,
 )
 
@@ -225,3 +226,19 @@ def test_selector_variable_names_are_discovered() -> None:
     }
 
     assert selector_variable_names(locator) == ["reference", "window"]
+
+
+def test_selector_profile_prefers_stable_automation_id_combination() -> None:
+    profile = selector_profile(
+        {
+            "automation_id": "txtOrder",
+            "name": "Order reference: 730",
+            "class_name": "Edit",
+            "control_type": "EditControl",
+            "framework_id": "WPF",
+        }
+    )
+
+    assert profile["stability"] == "high"
+    assert profile["strategy"] == "automation_id"
+    assert profile["candidate_labels"][0] == "AutomationId + ControlType"

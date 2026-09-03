@@ -47,6 +47,15 @@ STABLE_SELECTOR_FIELDS = tuple(
     field for field in SELECTOR_FIELDS if field not in VOLATILE_SELECTOR_FIELDS
 )
 
+_FIELD_DISPLAY_NAMES = {
+    "automation_id": "AutomationId",
+    "name": "Name",
+    "name_prefix": "NamePrefix",
+    "class_name": "ClassName",
+    "control_type": "ControlType",
+    "framework_id": "FrameworkId",
+}
+
 
 def safe_property(control: Any, name: str, default: Any = "") -> Any:
     try:
@@ -101,6 +110,61 @@ def recommended_selector_fields(item: dict[str, Any]) -> list[str]:
         field for field in ("class_name", "control_type", "framework_id") if properties.get(field)
     )
     return selected
+
+
+def selector_profile(
+    item: dict[str, Any], fields: list[str] | tuple[str, ...] | None = None
+) -> dict[str, Any]:
+    """Describe the Yingdao-style capture recommendation for a UI element.
+
+    The profile is informational and deliberately does not become part of the
+    locator contract. This keeps exported locators compatible while giving the
+    picker a clear explanation of why a property was selected.
+    """
+
+    properties = selector_properties(item)
+    selected = [
+        field
+        for field in (list(fields) if fields is not None else recommended_selector_fields(item))
+        if field in STABLE_SELECTOR_FIELDS and properties.get(field) not in (None, "", 0)
+    ]
+    candidates: list[list[str]] = []
+    for candidate in (
+        ("automation_id", "control_type"),
+        ("automation_id",),
+        ("name_prefix", "class_name", "control_type"),
+        ("name", "class_name", "control_type"),
+        ("class_name", "control_type", "framework_id"),
+    ):
+        if all(properties.get(field) not in (None, "", 0) for field in candidate):
+            fields_for_candidate = list(candidate)
+            if fields_for_candidate not in candidates:
+                candidates.append(fields_for_candidate)
+    if not candidates and selected:
+        candidates.append(selected)
+
+    if properties.get("automation_id"):
+        stability = "high"
+        strategy = "automation_id"
+    elif properties.get("name_prefix") and properties.get("control_type"):
+        stability = "medium"
+        strategy = "name_prefix"
+    elif properties.get("name") and properties.get("control_type"):
+        stability = "medium"
+        strategy = "name"
+    else:
+        stability = "low"
+        strategy = "structure"
+    return {
+        "stability": stability,
+        "strategy": strategy,
+        "selected_fields": selected,
+        "candidates": candidates,
+        "candidate_labels": [
+            " + ".join(_FIELD_DISPLAY_NAMES.get(field, field) for field in candidate)
+            for candidate in candidates
+        ],
+    }
 
 
 def selected_descriptor(item: dict[str, Any], fields: list[str] | None) -> dict[str, Any]:

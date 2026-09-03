@@ -32,6 +32,7 @@ from softauto.locator import (
     STABLE_SELECTOR_FIELDS,
     ensure_selector,
     recommended_selector_fields,
+    selector_profile,
     selector_properties,
     selector_variable_names,
 )
@@ -812,26 +813,31 @@ class ElementPickerApp:
                     self.highlighter.update(event[1])
                 elif event[0] == "validation":
                     if event[1]:
+                        diagnostics = event[4] if len(event) > 4 and isinstance(event[4], dict) else {}
+                        count = int(diagnostics.get("match_count", 1) or 1)
                         self.highlighter.update(event[3].get("bounds"))
                         self.root.after(1400, self.highlighter.clear)
                         self.status.config(
                             text=self._l(
-                                f"验证成功：{event[2]}", f"Validation succeeded: {event[2]}"
+                                f"验证成功：{event[2]}（{count} 个匹配）",
+                                f"Validation succeeded: {event[2]} ({count} match(es))",
                             )
                         )
                         messagebox.showinfo(
                             self._l("验证成功", "Validation Succeeded"),
-                            self._l(
-                                f"已找到并高亮：{event[2]}",
-                                f"Found and highlighted: {event[2]}",
-                            ),
+                            self._t("validation_matches", count=count, name=event[2]),
                         )
                     else:
+                        diagnostics = event[4] if len(event) > 4 and isinstance(event[4], dict) else {}
+                        stage = diagnostics.get("stage", "target")
+                        detail = self._t(
+                            "validation_failure_detail", stage=stage, message=event[3]
+                        )
                         self.status.config(
-                            text=self._l(f"验证失败：{event[2]}", f"Validation failed: {event[2]}")
+                            text=detail
                         )
                         messagebox.showerror(
-                            self._l("验证失败", "Validation Failed"), str(event[3])
+                            self._l("验证失败", "Validation Failed"), detail
                         )
                 elif event[0] == "web_capture":
                     if event[1]:
@@ -1110,6 +1116,28 @@ class ElementPickerApp:
             font=("Microsoft YaHei UI", 11, "bold"),
         ).pack(fill=tk.X, padx=6, pady=(4, 8))
 
+        profile = selector_profile(
+            self.detail_locator.get("target", {}),
+            self.detail_locator.get("selector", {}).get("target"),
+        )
+        strategy = self._t(f"strategy_{profile['strategy']}")
+        stability = self._t(f"stability_{profile['stability']}")
+        candidates = "；".join(profile.get("candidate_labels", [])) or self._l(
+            "暂无完整候选组合", "No complete candidate combination"
+        )
+        ttk.Label(
+            self.details_body,
+            text=self._t(
+                "capture_profile",
+                strategy=strategy,
+                stability=stability,
+                candidates=candidates,
+            ),
+            foreground=COLORS["muted"],
+            justify=tk.LEFT,
+            wraplength=max(260, self.details_frame.winfo_width() - 40),
+        ).pack(fill=tk.X, padx=6, pady=(0, 8))
+
         sections = (
             ("target", self._t("target_element"), self.detail_locator.get("target", {})),
             ("window", self._t("parent_window"), self.detail_locator.get("window", {})),
@@ -1328,8 +1356,27 @@ class ElementPickerApp:
         def worker() -> None:
             try:
                 with auto.UIAutomationInitializerInThread():
-                    fresh = self.backend.get_element(locator, selector_variables)
-                self.events.put(("validation", True, item["name"], fresh))
+                    diagnostics = self.backend.diagnose(locator, selector_variables)
+                if diagnostics.get("ok"):
+                    self.events.put(
+                        (
+                            "validation",
+                            True,
+                            item["name"],
+                            diagnostics["element"],
+                            diagnostics,
+                        )
+                    )
+                else:
+                    self.events.put(
+                        (
+                            "validation",
+                            False,
+                            item["name"],
+                            diagnostics.get("message", "Target element could not be resolved"),
+                            diagnostics,
+                        )
+                    )
             except (AutomationError, OSError, RuntimeError, ValueError) as exc:
                 self.events.put(("validation", False, item["name"], str(exc)))
 

@@ -67,7 +67,7 @@ flowchart LR
 - Edit recommended locator properties, wildcards, prefixes, and `${variable}` values. Runtime `ProcessId` and `NativeWindowHandle` remain diagnostic-only and cannot be selected for matching.
 - Resolve elements again after applications restart or windows move.
 - Expose 19 MCP query and action tools, including find, highlight, click, input, focus, and read.
-- Use Windows UIA and browser DOM backends from one element library.
+- Use Windows UIA and browser DOM backends from one element library; desktop capture automatically falls back through the bundled FlaUI UIA3 → UIA2 bridge when the primary provider cannot inspect a control.
 - Switch between Simplified Chinese and English; responsive UI supports Windows DPI scaling.
 - No arbitrary shell execution and no unrestricted coordinate clicking through MCP.
 

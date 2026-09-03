@@ -10,7 +10,7 @@ from softauto.picker import APP_TITLE, BRAND_NAME
 def test_brand_identity_and_release_version() -> None:
     assert BRAND_NAME == "零禾一智能"
     assert BRAND_NAME in APP_TITLE
-    assert __version__ == "0.5.4"
+    assert __version__ == "0.5.6"
 
 
 def test_brand_assets_include_real_alpha_and_windows_icon() -> None:

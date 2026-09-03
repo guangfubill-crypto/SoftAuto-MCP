@@ -13,6 +13,7 @@ from .locator import (
     choose_best,
     configured_descriptor,
     descriptor,
+    descriptor_score,
     path_below_window,
     resolve_path,
 )
@@ -81,11 +82,22 @@ class WindowsUIABackend:
     def element_from_point(self, x: int | None = None, y: int | None = None) -> dict[str, Any]:
         if x is None or y is None:
             x, y = auto.GetCursorPos()
-        control = auto.ControlFromPoint(int(x), int(y))
-        result = self._snapshot(control)
-        result["point"] = {"x": int(x), "y": int(y)}
-        result["ancestors"] = self.ancestors(control)
-        return result
+        point = (int(x), int(y))
+        try:
+            control = auto.ControlFromPoint(*point)
+            result = self._snapshot(control)
+            result["point"] = {"x": point[0], "y": point[1]}
+            result["ancestors"] = self.ancestors(control)
+            result["capture_engine"] = "python-uia"
+            return result
+        except (AutomationError, COMError, OSError, RuntimeError) as primary_error:
+            try:
+                from .flaui_bridge import FlaUIBridgeError, inspect_point
+
+                fallback = inspect_point(point[0], point[1], engine="auto")
+                return fallback
+            except FlaUIBridgeError:
+                raise primary_error
 
     def ancestors(self, control: Any, limit: int = 32) -> list[dict[str, Any]]:
         items = []
@@ -168,6 +180,80 @@ class WindowsUIABackend:
         self, locator: dict[str, Any], variables: dict[str, Any] | None = None
     ) -> dict[str, Any]:
         return self._snapshot(self.resolve(locator, variables))
+
+    def diagnose(
+        self, locator: dict[str, Any], variables: dict[str, Any] | None = None
+    ) -> dict[str, Any]:
+        """Resolve a locator and return the same diagnostics shown by RPA pickers."""
+
+        if locator.get("backend") != self.backend_name or locator.get("version") != 1:
+            raise AutomationError("Unsupported locator backend or version")
+        windows = auto.GetRootControl().GetChildren()
+        selector = locator.get("selector", {})
+        values = selector.get("values", {})
+        window_expected = configured_descriptor(
+            locator.get("window", {}),
+            selector.get("window"),
+            values.get("window"),
+            variables,
+        )
+        window = choose_best(window_expected, windows)
+        if window is None:
+            window = self._find_nested_window(window_expected, windows)
+        if window is None:
+            return {
+                "ok": False,
+                "stage": "window",
+                "match_count": 0,
+                "message": "Target window could not be resolved",
+            }
+
+        raw_path = locator.get("path", [])
+        path_fields = selector.get("path", [])
+        selected_path = [
+            configured_descriptor(
+                segment,
+                path_fields[index] if index < len(path_fields) else None,
+                values.get("path", [])[index]
+                if index < len(values.get("path", []))
+                else None,
+                variables,
+            )
+            for index, segment in enumerate(raw_path)
+        ]
+        path = path_below_window(window, selected_path)
+        target = configured_descriptor(
+            locator.get("target", {}),
+            selector.get("target"),
+            values.get("target"),
+            variables,
+        )
+        path_control = resolve_path(window, path) if path else window
+        candidates = [path_control] if path_control is not None else []
+        if not candidates or choose_best(target, candidates) is None:
+            candidates = self._walk(window, max_depth=12, max_results=5000)
+        matches = [
+            control
+            for control in candidates
+            if descriptor_score(target, descriptor(control)) >= 0
+            and choose_best(target, [control]) is not None
+        ]
+        if not matches:
+            return {
+                "ok": False,
+                "stage": "target",
+                "match_count": 0,
+                "message": "Target element could not be resolved",
+            }
+        chosen = choose_best(target, matches)
+        snapshot = self._snapshot(chosen)
+        return {
+            "ok": True,
+            "stage": "target",
+            "match_count": len(matches),
+            "element": snapshot,
+            "selected": snapshot,
+        }
 
     def children(self, locator: dict[str, Any], limit: int = 100) -> list[dict[str, Any]]:
         control = self.resolve(locator)

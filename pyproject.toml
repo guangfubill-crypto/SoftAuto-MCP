@@ -1,6 +1,6 @@
 [project]
 name = "software-automation-mcp"
-version = "0.5.4"
+version = "0.5.6"
 description = "Open-source Windows RPA and MCP server for desktop UIA, browser DOM, ERP, and AI agent automation"
 readme = "README.md"
 license = "MIT"

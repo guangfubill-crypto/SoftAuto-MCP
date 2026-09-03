@@ -7,11 +7,11 @@ def catalog() -> list[dict[str, Any]]:
     return [
         {
             "id": "windows-uia",
-            "role": "Windows element inspection and actions",
+            "role": "Windows element inspection and actions with FlaUI UIA3/UIA2 fallback",
             "project": "Python-UIAutomation-for-Windows",
             "repository": "https://github.com/yinkaisheng/Python-UIAutomation-for-Windows",
             "license": "Apache-2.0",
-            "connection": "Built into this thin MCP adapter",
+            "connection": "Python UIA primary; bundled FlaUI Bridge tries UIA3 then UIA2 when capture fails",
         },
         {
             "id": "flauinspect",

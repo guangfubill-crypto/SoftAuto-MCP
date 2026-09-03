@@ -1,3 +1,21 @@
+# SoftAuto 0.5.6 — FlaUI UIA3/UIA2 采集回退
+
+本版本在 Python UIA 采集失败时自动调用内置 FlaUI Bridge：先尝试 UIA3，再回退 UIA2。采集结果仍转换为 SoftAuto 稳定 Locator，后续 MCP 动作无需改变。
+
+Windows 用户请下载 `Lingheyi-SoftAuto-Setup-0.5.6.exe`。
+
+---
+
+# SoftAuto 0.5.5 — 影刀式元素采集与定位诊断
+
+本版本参考影刀 RPA 的元素采集体验：采集后在右侧直接查看系统推荐策略、稳定性和候选属性组合；验证会显示匹配数量并高亮最佳匹配，失败时提示窗口/元素阶段。
+
+桌面元素仍使用 Windows UI Automation，动态文本可用 NamePrefix、通配符或 `${变量}`，ProcessId 和窗口句柄继续仅用于诊断。
+
+Windows 用户请下载 `Lingheyi-SoftAuto-Setup-0.5.5.exe`。
+
+---
+
 # SoftAuto 0.5.4 — 重启后仍可复用的稳定定位
 
 SoftAuto 0.5.4 修复桌面元素重启后失效的常见原因：`ProcessId` 和 `NativeWindowHandle` 属于运行时身份，不再允许作为定位条件；历史元素库中的这两个字段也会在解析时自动忽略。
